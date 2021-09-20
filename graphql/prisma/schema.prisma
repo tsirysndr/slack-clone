@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nexusPrisma {
+  provider = "nexus-prisma"
+}
+
+enum UserStatus {
+  ACTIVE
+  AWAY
+}
+
+model user {
+  id                String           @id @default(cuid())
+  email             String           @unique
+  password          String?
+  username          String           @unique
+  firstName         String?
+  lastName          String?
+  channels          channel[]
+  updatedAt         DateTime         @updatedAt
+  createdAt         DateTime         @default(now())
+  users_channels    users_channels[]
+  sent_messages     message[]        @relation(name: "sender")
+  received_messages message[]        @relation(name: "receiver")
+  status            UserStatus       @default(ACTIVE)
+}
+
+model users_channels {
+  id        String  @id @default(cuid())
+  userId    String
+  channelId String
+  user      user    @relation(fields: [userId], references: [id])
+  channel   channel @relation(fields: [channelId], references: [id])
+}
+
+model channel {
+  id             String           @id @default(cuid())
+  name           String           @unique
+  creatorId      String
+  creator        user             @relation(fields: [creatorId], references: [id])
+  updatedAt      DateTime         @updatedAt
+  createdAt      DateTime         @default(now())
+  users_channels users_channels[]
+  messages       message[]        @relation(name: "channel")
+  isPrivate      Boolean          @default(false)
+}
+
+model message {
+  id         String   @id @default(cuid())
+  content    String
+  senderId   String
+  receiverId String
+  sender     user     @relation(fields: [senderId], references: [id], name: "sender")
+  receiver   user     @relation(fields: [receiverId], references: [id], name: "receiver")
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+  channel    channel? @relation("channel", fields: [channelId], references: [id])
+  channelId  String?
+  seen       Boolean  @default(false)
+}

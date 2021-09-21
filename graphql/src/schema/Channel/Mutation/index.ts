@@ -1,4 +1,4 @@
-import { stringArg, nonNull, extendType } from 'nexus';
+import { stringArg, nonNull, extendType, booleanArg } from 'nexus';
 import { Context } from '../../../context';
 import cuid from 'cuid';
 
@@ -8,14 +8,16 @@ export const ChannelMutation = extendType({
     t.field('createChannel', {
       type: 'channel',
       args: {
-        name: nonNull(stringArg())
+        name: nonNull(stringArg()),
+        isPrivate: booleanArg(),
       },
       resolve: (_, args, ctx: Context) => {
         return ctx.prisma.channel.create({
           data: {
             name: args.name || cuid(),
+            isPrivate: args.isPrivate || false,
             creator: {
-              connect: { id: ''},
+              connect: { id: '' },
             },
           }
         });

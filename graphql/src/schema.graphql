@@ -8,13 +8,16 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 scalar DateTime
 
 type Mutation {
-  createChannel(name: String!): channel
+  createChannel(isPrivate: Boolean, name: String!): channel
   login(email: String!, password: String!): user
+  sendMessage(content: String!, recipient: String!): message
 }
 
 type Query {
   allChannels: [channel]!
+  allMessages: [message]!
   allUsers: [user]!
+  findMessage(id: String!): message
   user(id: String!): user
 }
 

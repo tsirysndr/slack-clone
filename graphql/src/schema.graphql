@@ -18,8 +18,9 @@ type Query {
   allChannels: [channel]!
   allMessages: [message]!
   allUsers: [user]!
+  findChannel(id: String!): channel
   findMessage(id: String!): message
-  user(id: String!): user
+  findUser(id: String!): user
 }
 
 type channel {

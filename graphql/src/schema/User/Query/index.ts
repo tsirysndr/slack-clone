@@ -11,7 +11,7 @@ export const UserQuery = extendType({
       },
     });
 
-    t.field('user', {
+    t.field('findUser', {
       type: 'user',
       args: {
         id: nonNull(stringArg()),

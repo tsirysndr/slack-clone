@@ -9,8 +9,8 @@ scalar DateTime
 
 type Mutation {
   createChannel(isPrivate: Boolean, name: String!): channel
-  editChannel(isPrivate: Boolean, name: String): channel
-  editProfile(firstName: String, lastName: String, password: String, username: String): user
+  editChannel(id: String!, isPrivate: Boolean, name: String): channel
+  editProfile(firstName: String, id: String!, lastName: String, password: String, username: String): user
   login(email: String!, password: String!): user
   sendMessage(content: String!, recipient: String!): message
 }
@@ -25,8 +25,8 @@ type Query {
 }
 
 type Subscription {
-  newMessage: message
-  userOnlineStatus: user
+  newMessage(id: String!): message
+  userOnlineStatus(id: String!): user
 }
 
 enum UserStatusEnum {

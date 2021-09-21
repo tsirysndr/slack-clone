@@ -26,6 +26,7 @@ export const ChannelMutation = extendType({
     t.field('editChannel', {
       type: 'channel',
       args: {
+        id: nonNull(stringArg()),
         name: stringArg(),
         isPrivate: booleanArg(),
       },

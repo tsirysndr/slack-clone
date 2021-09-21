@@ -17,6 +17,7 @@ export const UserMutation = extendType({
     t.field('editProfile', {
       type: 'user',
       args: {
+        id: nonNull(stringArg()),
         password: stringArg(),
         username: stringArg(),
         firstName: stringArg(),

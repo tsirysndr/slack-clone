@@ -1,8 +1,9 @@
-import { mutationType, stringArg, nonNull } from 'nexus';
+import { stringArg, nonNull, extendType } from 'nexus';
 import { Context } from '../../../context';
 import cuid from 'cuid';
 
-export const ChannelMutation = mutationType({
+export const ChannelMutation = extendType({
+  type: 'Mutation',
   definition(t) {
     t.field('createChannel', {
       type: 'channel',

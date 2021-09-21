@@ -9,10 +9,13 @@ scalar DateTime
 
 type Mutation {
   createChannel(name: String!): channel
+  login(email: String!, password: String!): user
 }
 
 type Query {
   allChannels: [channel]!
+  allUsers: [user]!
+  user(id: String!): user
 }
 
 type channel {
@@ -48,6 +51,7 @@ type user {
   lastName: String
   received_messages: [message!]!
   sent_messages: [message!]!
+  token: String
   updatedAt: DateTime!
   username: String!
 }

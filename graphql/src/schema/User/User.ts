@@ -1,4 +1,4 @@
-import { objectType } from 'nexus';
+import { nullable, objectType } from 'nexus';
 import { user } from 'nexus-prisma';
 
 export const User = objectType({
@@ -14,5 +14,6 @@ export const User = objectType({
     t.field(user.updatedAt);
     t.field(user.sent_messages);
     t.field(user.received_messages);
+    t.string('token');
   },
 });

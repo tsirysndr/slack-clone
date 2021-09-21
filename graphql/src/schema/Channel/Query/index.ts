@@ -1,7 +1,8 @@
-import { queryType } from 'nexus';
+import { extendType } from 'nexus';
 import { Context } from '../../../context';
 
-export const ChannelQuery = queryType({
+export const ChannelQuery = extendType({
+  type: 'Query',
   definition(t) {
     t.nonNull.list.field('allChannels', {
       type: 'channel',

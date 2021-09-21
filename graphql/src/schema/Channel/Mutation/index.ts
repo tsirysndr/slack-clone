@@ -1,5 +1,6 @@
 import { mutationType, stringArg, nonNull } from 'nexus';
 import { Context } from '../../../context';
+import cuid from 'cuid';
 
 export const ChannelMutation = mutationType({
   definition(t) {
@@ -11,7 +12,7 @@ export const ChannelMutation = mutationType({
       resolve: (_, args, ctx: Context) => {
         return ctx.prisma.channel.create({
           data: {
-            name: args.name || '',
+            name: args.name || cuid(),
             creator: {
               connect: { id: ''},
             },

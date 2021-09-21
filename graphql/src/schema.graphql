@@ -9,6 +9,7 @@ scalar DateTime
 
 type Mutation {
   createChannel(isPrivate: Boolean, name: String!): channel
+  editProfile(firstName: String, lastName: String, password: String, username: String): user
   login(email: String!, password: String!): user
   sendMessage(content: String!, recipient: String!): message
 }

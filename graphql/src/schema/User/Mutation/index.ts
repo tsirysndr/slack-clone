@@ -14,5 +14,17 @@ export const UserMutation = extendType({
         return {} as any;
       },
     });
+    t.field('editProfile', {
+      type: 'user',
+      args: {
+        password: stringArg(),
+        username: stringArg(),
+        firstName: stringArg(),
+        lastName: stringArg(),
+      },
+      resolve: (_, args, ctx: Context) => {
+        return {} as any;
+      }
+    })
   },
 });

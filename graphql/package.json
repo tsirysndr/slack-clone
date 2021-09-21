@@ -27,6 +27,7 @@
     "subscriptions-transport-ws": "^0.9.19"
   },
   "devDependencies": {
+    "@types/ioredis": "^4.27.4",
     "@types/node": "^16.9.4",
     "prettier": "^2.4.1",
     "prisma": "3.0.2",

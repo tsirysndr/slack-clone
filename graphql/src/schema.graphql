@@ -24,6 +24,11 @@ type Query {
   findUser(id: String!): user
 }
 
+type Subscription {
+  newMessage: message
+  userOnlineStatus: user
+}
+
 type channel {
   createdAt: DateTime!
   creator: user!

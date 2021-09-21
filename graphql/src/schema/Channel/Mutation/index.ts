@@ -23,5 +23,23 @@ export const ChannelMutation = extendType({
         });
       }
     });
+    t.field('editChannel', {
+      type: 'channel',
+      args: {
+        name: stringArg(),
+        isPrivate: booleanArg(),
+      },
+      resolve: (_, args, ctx: Context) => {
+        return ctx.prisma.channel.create({
+          data: {
+            name: args.name || cuid(),
+            isPrivate: args.isPrivate || false,
+            creator: {
+              connect: { id: '' },
+            },
+          }
+        });
+      }
+    });
   },
 });

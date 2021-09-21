@@ -29,6 +29,11 @@ type Subscription {
   userOnlineStatus: user
 }
 
+enum UserStatusEnum {
+  ACTIVE
+  AWAY
+}
+
 type channel {
   createdAt: DateTime!
   creator: user!
@@ -62,6 +67,7 @@ type user {
   lastName: String
   received_messages: [message!]!
   sent_messages: [message!]!
+  status: UserStatusEnum
   token: String
   updatedAt: DateTime!
   username: String!

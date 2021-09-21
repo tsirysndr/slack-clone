@@ -5,7 +5,7 @@
   </a>
 </p>
 
-> Slack-Clone is a clone of a slack. Implemented using React, Prisma and GraphQL.
+> Slack-Clone is a clone of slack. Implemented using React, Prisma and GraphQL.
 
 ## Install
 

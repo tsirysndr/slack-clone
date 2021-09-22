@@ -12,7 +12,7 @@
 Create a .env file from the .env.example:
 
 ```sh
-cp .env.example .env
+cp .env.example .env && cp graphql/.env.example graphql/.env && cp web/.env.example web/.env && cp web/.env.example web/.env.local
 ```
 
 ```sh

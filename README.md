@@ -15,10 +15,16 @@ Create a .env file from the .env.example:
 cp .env.example .env && cp graphql/.env.example graphql/.env && cp web/.env.example web/.env && cp web/.env.example web/.env.local
 ```
 
+Start the server:
+
 ```sh
 docker-compose up
 ```
 
+Start the client :
+```sh
+cd web && yarn install && yarn start
+```
 ## Author
 
 👤 **Tsiry Sandratraina**

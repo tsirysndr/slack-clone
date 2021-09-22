@@ -1,7 +1,9 @@
-import { ApolloError, useMutation } from '@apollo/client';
+import { ApolloError, useMutation, useQuery } from '@apollo/client';
 import { createContext, FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { DO_LOGIN } from '../GraphQL/User/mutation';
+import { DO_GET_ALL_USERS } from '../GraphQL/User/query';
+import { AllUsers, AllUsers_allUsers } from '../GraphQL/User/types/AllUsers';
 import {
   Login,
   LoginVariables,
@@ -22,6 +24,7 @@ interface IUserProvider {
   loading: boolean;
   setLoading: (loading: boolean) => void;
   errorMsg: string | null;
+  allUsers?: (AllUsers_allUsers | null)[] | null;
 }
 
 export const UserContext = createContext<IUserProvider>({
@@ -31,12 +34,14 @@ export const UserContext = createContext<IUserProvider>({
   loading: false,
   setLoading: () => {},
   errorMsg: null,
+  allUsers: null,
 });
 
 export const UserProvider: FC = ({ children }) => {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<Login_login | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [allUsers, setAllUsers] = useState<(AllUsers_allUsers | null)[] | null>(null);
   const history = useHistory();
   const [doLogin, { loading: loadingLogin }] = useMutation<
     Login,
@@ -55,6 +60,15 @@ export const UserProvider: FC = ({ children }) => {
       setErrorMsg('Invalid username or password');
     },
   });
+  const { loading: allUsersLoading } = useQuery<AllUsers>(DO_GET_ALL_USERS, {
+    onCompleted: (data: AllUsers) => {
+      if (data && data.allUsers) {
+        setAllUsers(data.allUsers);
+      }
+    },
+    onError: (error: ApolloError) => {}
+  })
+
   const handleSignIn = async (username: string, password: string) => {
     setLoading(loadingLogin);
     await doLogin({
@@ -88,6 +102,7 @@ export const UserProvider: FC = ({ children }) => {
         loading,
         setLoading,
         errorMsg,
+        allUsers,
       }}
     >
       {children}

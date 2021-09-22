@@ -1,20 +1,22 @@
-import React, { FC } from 'react';
+import { FC, useContext } from 'react';
+import { UserContext } from '../../Providers/UserProvider';
 
 const Users: FC = () => {
-  const handleSelectUser = (user: any) => {
-
-  }
+  const { allUsers } = useContext(UserContext);
+  const handleSelectUser = (user: any) => {};
   return (
     <>
       <div style={{ fontWeight: 'bold', fontSize: 16 }}>Direct Messages</div>
-      <div>
-        <div onClick={() => handleSelectUser('')} className="link" style={{ padding: 5, cursor: 'pointer' }}>
-          Tsiry Sandratraina
+      {allUsers?.map((user: any) => (
+        <div
+          key={user.id}
+          onClick={() => handleSelectUser(user)}
+          className="link"
+          style={{ padding: 5, cursor: 'pointer' }}
+        >
+          {user.firstName} {user.lastName}
         </div>
-        <div className="link" style={{ padding: 5, cursor: 'pointer' }}>
-          Koto
-        </div>
-      </div>
+      ))}
     </>
   );
 };

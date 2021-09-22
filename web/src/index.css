@@ -18,7 +18,7 @@ code {
 }
 
 .link:hover {
-  background-color: #fd34d16b;
+  background-color: #fd34d16b !important;
 }
 
 .button:hover {

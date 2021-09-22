@@ -9,6 +9,12 @@
 
 ## Install
 
+Create a .env file from the .env.example:
+
+```sh
+cp .env.example .env
+```
+
 ```sh
 docker-compose up
 ```

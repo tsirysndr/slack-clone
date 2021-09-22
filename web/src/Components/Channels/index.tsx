@@ -11,6 +11,9 @@ const Channels: FC = () => {
         <div className="link" style={{ padding: 5, cursor: 'pointer' }}>
           # général
         </div>
+        <div className="link" style={{ fontWeight: 'bold', padding: 5, cursor: 'pointer', /*backgroundColor: 'rgb(106 55 187)'*/ }}>
+          + Create a new channel
+        </div>
       </div>
     </div>
   );

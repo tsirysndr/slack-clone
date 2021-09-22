@@ -7,14 +7,14 @@ import { ChakraProvider } from '@chakra-ui/react';
 function App() {
   return (
     <ChakraProvider>
-      <Provider>
-        <HashRouter hashType="hashbang">
+      <HashRouter hashType="hashbang">
+        <Provider>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
           </Switch>
-        </HashRouter>
-      </Provider>
+        </Provider>
+      </HashRouter>
     </ChakraProvider>
   );
 }

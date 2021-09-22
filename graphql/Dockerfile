@@ -8,4 +8,4 @@ COPY . .
 RUN yarn add @types/ioredis @types/ws --dev
 RUN yarn generate && yarn build
 EXPOSE 4000
-CMD npm run migrate && npm start
+CMD npm run migrate && npm run seed && npm start

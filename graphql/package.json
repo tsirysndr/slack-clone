@@ -10,7 +10,8 @@
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only src/schema",
     "studio": "prisma studio",
-    "migrate": "prisma migrate deploy"
+    "migrate": "prisma migrate deploy",
+    "seed": "ts-node --transpile-only prisma/seed"
   },
   "dependencies": {
     "@prisma/client": "3.0.2",

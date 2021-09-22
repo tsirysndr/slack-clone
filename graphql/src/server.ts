@@ -18,9 +18,9 @@ const server = new ApolloServer({
   introspection: true,
 });
 
-server.start().then((x) => {
+server.start().then(() => {
   server.applyMiddleware({ app, bodyParserConfig: { limit: '200mb' } });
-  console.log(`🚀  Server ready at ${x}`);
+  console.log(`🚀 Server ready`);
 });
 
 const httpServer = createServer(app);

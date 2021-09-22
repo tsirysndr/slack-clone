@@ -1,8 +1,17 @@
 import { FC } from 'react';
 import Header from '../Header';
 import Message from '../Message';
+import { AiOutlineSend } from 'react-icons/ai';
+import styled from 'styled-components';
+
+const SendButton = styled.div`
+  cursor: pointer;
+  position: absolute;
+  right: 55px;
+`;
 
 const MessageView: FC = () => {
+  const handleSend = () => {};
   return (
     <div style={{ flex: 1 }}>
       <Header />
@@ -39,6 +48,9 @@ const MessageView: FC = () => {
               marginRight: 10,
             }}
           ></input>
+          <SendButton onClick={handleSend}>
+            <AiOutlineSend size={30} color={'#9c9c9cdc'} />
+          </SendButton>
         </div>
       </div>
     </div>

@@ -1,9 +1,11 @@
 import { FC } from 'react';
 import { useHistory } from 'react-router';
+import { removeAccessToken } from '../../LocalStorage';
 
 const Header: FC = () => {
   const history = useHistory();
   const handleLogout = () => {
+    removeAccessToken();
     history.push('/login');
   };
   return (

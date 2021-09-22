@@ -14,8 +14,11 @@
   "dependencies": {
     "@prisma/client": "3.0.2",
     "apollo-server": "^3.3.0",
+    "apollo-server-express": "^3.3.0",
     "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "cuid": "^2.1.8",
+    "express": "^4.17.1",
     "graphql": "15.6.0",
     "graphql-redis-subscriptions": "^2.4.0",
     "graphql-scalars": "^1.10.1",
@@ -29,6 +32,7 @@
   "devDependencies": {
     "@types/ioredis": "^4.27.4",
     "@types/node": "^16.9.4",
+    "@types/ws": "^7.4.7",
     "prettier": "^2.4.1",
     "prisma": "3.0.2",
     "ts-node": "^10.2.1",

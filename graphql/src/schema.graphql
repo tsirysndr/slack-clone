@@ -11,7 +11,7 @@ type Mutation {
   createChannel(isPrivate: Boolean, name: String!): channel
   editChannel(id: String!, isPrivate: Boolean, name: String): channel
   editProfile(firstName: String, id: String!, lastName: String, password: String, username: String): user
-  login(email: String!, password: String!): user
+  login(password: String!, username: String!): user
   sendMessage(content: String!, recipient: String!): message
 }
 

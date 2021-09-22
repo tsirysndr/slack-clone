@@ -5,7 +5,7 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn install
 COPY . .
-RUN yarn add @types/ioredis @types/ws --dev
+RUN yarn add @types/ioredis @types/ws @types/bcrypt --dev
 RUN yarn generate && yarn build
 EXPOSE 4000
 CMD npm run migrate && npm run seed && npm start

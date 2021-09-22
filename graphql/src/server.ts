@@ -5,16 +5,18 @@ import { createServer } from 'http';
 import { execute, subscribe } from 'graphql';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { schema } from './schema';
-import { context } from './context';
+import { context, createContext } from './context';
 import bodyParser from 'body-parser';
 
 const app = express();
 app.use(cors());
 app.use('/graphql', bodyParser.json({ limit: '200mb' }));
 
+const { redis } = context;
+
 const server = new ApolloServer({
   schema,
-  context,
+  context: (req) => createContext(req, redis),
   introspection: true,
 });
 
@@ -48,12 +50,12 @@ httpServer.listen(PORT, () => {
       // This `server` is the instance returned from `new ApolloServer`.
       path: server.graphqlPath,
     },
-  );  
+  );
 
   console.log(
-    `🚀 Query endpoint ready at http://localhost:${PORT}${server.graphqlPath}`
+    `🚀 Query endpoint ready at http://localhost:${PORT}${server.graphqlPath}`,
   );
   console.log(
-    `🚀 Subscription endpoint ready at ws://localhost:${PORT}${server.graphqlPath}`
+    `🚀 Subscription endpoint ready at ws://localhost:${PORT}${server.graphqlPath}`,
   );
 });

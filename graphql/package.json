@@ -33,6 +33,7 @@
     "subscriptions-transport-ws": "^0.9.19"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/ioredis": "^4.27.4",
     "@types/node": "^16.9.4",
     "@types/ws": "^7.4.7",

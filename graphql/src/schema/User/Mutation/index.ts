@@ -1,5 +1,7 @@
 import { extendType, nonNull, stringArg } from 'nexus';
 import { Context } from '../../../context';
+import bcrypt from 'bcrypt';
+import { randomStr } from '../../../lib/auth';
 
 export const UserMutation = extendType({
   type: 'Mutation',
@@ -7,11 +9,22 @@ export const UserMutation = extendType({
     t.field('login', {
       type: 'user',
       args: {
-        email: nonNull(stringArg()),
+        username: nonNull(stringArg()),
         password: nonNull(stringArg()),
       },
-      resolve: (_, args, ctx: Context) => {
-        return {} as any;
+      resolve: async (_, args, ctx: Context) => {
+        const { username, password } = args;
+        const user = await ctx.prisma.user.findFirst({ where: { username } });
+        if (!user) {
+          throw new Error('User not found');
+        };
+        const isValid = await bcrypt.compare(password, user.password || '');
+        if (!isValid) {
+          throw new Error('Invalid password');
+        }
+        const token = randomStr();
+        await ctx.redis.setex(token, 48 * 3600, user.id);
+        return { ...user, token } as any;
       },
     });
     t.field('editProfile', {

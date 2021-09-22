@@ -15,13 +15,25 @@ const Container = styled.div`
 const Login: FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { handleSignIn } = useContext(UserContext);
+  const { handleSignIn, errorMsg } = useContext(UserContext);
+
+  const handleKeyPress = (event: any) => {
+    if (event.key === 'Enter') {
+      handleSignIn(username, password);
+    }
+  };
+
   return (
     <Container>
       <div style={{ fontWeight: 'bold', padding: 25, fontSize: 25 }}>
         Slack Clone
       </div>
       <div>
+        {errorMsg !== null && (
+          <div style={{ color: 'red', textAlign: 'center', marginBottom: 5 }}>
+            {errorMsg}
+          </div>
+        )}
         <Input
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
@@ -31,6 +43,7 @@ const Login: FC = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           type="password"
+          onKeyPress={handleKeyPress}
         />
         <Button
           onClick={() => handleSignIn(username, password)}
@@ -40,7 +53,8 @@ const Login: FC = () => {
         </Button>
       </div>
       <div style={{ marginTop: 15 }}>
-        Available demo users : (user1, password1), (user2, password2) and (user3, password3)
+        Available demo users : (user1, password1), (user2, password2) and
+        (user3, password3)
       </div>
     </Container>
   );

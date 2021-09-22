@@ -21,6 +21,7 @@ interface IUserProvider {
   handleLogout: () => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
+  errorMsg: string | null;
 }
 
 export const UserContext = createContext<IUserProvider>({
@@ -29,9 +30,11 @@ export const UserContext = createContext<IUserProvider>({
   handleLogout: () => {},
   loading: false,
   setLoading: () => {},
+  errorMsg: null,
 });
 
 export const UserProvider: FC = ({ children }) => {
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<Login_login | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const history = useHistory();
@@ -41,13 +44,16 @@ export const UserProvider: FC = ({ children }) => {
   >(DO_LOGIN, {
     onCompleted: (data: Login) => {
       if (data && data.login && data.login.token) {
+        setErrorMsg(null);
         setAccessToken(data.login.token);
         setCurrentUser(data.login);
         setCurrentUserInfos(data.login);
         history.push('/');
       }
     },
-    onError: (error: ApolloError) => {},
+    onError: (error: ApolloError) => {
+      setErrorMsg('Invalid username or password');
+    },
   });
   const handleSignIn = async (username: string, password: string) => {
     setLoading(loadingLogin);
@@ -81,6 +87,7 @@ export const UserProvider: FC = ({ children }) => {
         handleLogout,
         loading,
         setLoading,
+        errorMsg,
       }}
     >
       {children}

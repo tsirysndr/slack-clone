@@ -25,7 +25,7 @@ const MessageView: FC = () => {
         <div style={{ padding: 15, fontWeight: 500 }}>
           <div style={{ fontWeight: 'bold' }}>Koto</div>
           <div style={{ padding: 5 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Hello!
           </div>
         </div>
       </div>

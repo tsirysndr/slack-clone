@@ -2,8 +2,8 @@ import gql from 'graphql-tag';
 import { USER_FRAGMENT } from './fragment';
 
 export const DO_LOGIN = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+  mutation Login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
       ...UserFragment
     }
   }

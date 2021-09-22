@@ -130,6 +130,6 @@ export interface Login {
 }
 
 export interface LoginVariables {
-  email: string;
+  username: string;
   password: string;
 }

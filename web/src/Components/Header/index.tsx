@@ -1,13 +1,8 @@
-import { FC } from 'react';
-import { useHistory } from 'react-router';
-import { removeAccessToken } from '../../LocalStorage';
+import { FC, useContext } from 'react';
+import { UserContext } from '../../Providers/UserProvider';
 
 const Header: FC = () => {
-  const history = useHistory();
-  const handleLogout = () => {
-    removeAccessToken();
-    history.push('/login');
-  };
+  const { handleLogout } = useContext(UserContext);
   return (
     <div
       style={{

@@ -912,7 +912,7 @@
             "description": null,
             "args": [
               {
-                "name": "email",
+                "name": "username",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",

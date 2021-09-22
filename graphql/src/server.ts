@@ -13,8 +13,8 @@ app.use(cors());
 app.use('/graphql', bodyParser.json({ limit: '200mb' }));
 
 const server = new ApolloServer({
-  schema: schema,
-  context: context,
+  schema,
+  context,
   introspection: true,
 });
 
@@ -35,6 +35,12 @@ httpServer.listen(PORT, () => {
       // These are imported from `graphql`.
       execute,
       subscribe,
+      onOperation: (message: string, params: any) => {
+        return {
+          ...params,
+          context,
+        };
+      },
     },
     {
       // This is the `httpServer` we created in a previous step.

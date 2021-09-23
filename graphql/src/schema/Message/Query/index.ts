@@ -20,6 +20,16 @@ export const MessageQuery = extendType({
           return ctx.prisma.message.findMany({
             where: { senderId: args.receiverId, receiverId: args.receiverId },
           });
+        } 
+        if (ctx.currentUser?.id !== args.receiverId) {
+          return ctx.prisma.message.findMany({
+            where: {
+              OR: [
+                { senderId: args.receiverId, receiverId: ctx.currentUser?.id },
+                { senderId: ctx.currentUser?.id, receiverId: args.receiverId },
+              ],
+            },
+          });
         }
         return ctx.prisma.message.findMany({
           where: { receiverId: args.receiverId },

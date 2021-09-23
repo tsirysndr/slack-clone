@@ -124,8 +124,11 @@ export const MessageProvider: FC = ({ children }) => {
         recipient,
         selectRecipient: setRecipient,
         sendMessage,
-        refetchMessages: () => {
-          refetchMessages && refetchMessages();
+        refetchMessages: async () => {
+          if (refetchMessages) {
+            const res = await refetchMessages();
+            setAllMessages(res.data.allMessages);
+          }
         },
       }}
     >

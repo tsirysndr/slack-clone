@@ -11,10 +11,14 @@ export const MessageSubscription = subscriptionField('newMessage', {
   subscribe: withFilter(
     (_, args, ctx: Context) => ctx.pubsub.asyncIterator('NEW_MESSAGE'),
     (payload: message, args, ctx) => {
+      //console.log('payload', payload);
+      //console.log('args.id', args.id);
+      /*
       if (payload.receiverId === args.id || payload.channelId === args.id) {
         return true;
       }
-      return false;
+      */
+      return true;
     },
   ),
   resolve: async (payload: message, args, ctx) => {

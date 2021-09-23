@@ -12,11 +12,15 @@ const app = express();
 app.use(cors());
 app.use('/graphql', bodyParser.json({ limit: '200mb' }));
 
-const { redis } = context;
+const { redis, pubsub } = context;
 
 const server = new ApolloServer({
   schema,
-  context: (req) => createContext(req, redis),
+  context: async (req) => {
+    const ctx = await createContext(req, redis);
+    ctx.pubsub = pubsub;
+    return ctx;
+  },
   introspection: true,
 });
 
@@ -44,7 +48,6 @@ httpServer.listen(PORT, () => {
         };
       },
       onConnect: async (connectionParams: any, websocket: any) => {
-        console.log('authToken', connectionParams.authToken);
         const id = await redis.get(connectionParams.authToken);
         if (id != null) {
           const currentUser = await prisma.user.findFirst({ where: { id } });

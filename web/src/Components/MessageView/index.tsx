@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useRef, useState } from 'react';
 import Header from '../Header';
 import Message from '../Message';
 import { AiOutlineSend } from 'react-icons/ai';
@@ -9,6 +9,7 @@ import {
   ApolloClient,
   NormalizedCacheObject,
   useApolloClient,
+  useSubscription,
 } from '@apollo/client';
 
 const SendButton = styled.div`
@@ -18,41 +19,29 @@ const SendButton = styled.div`
 `;
 
 const MessageView: FC = () => {
+  const messagesEndRef = useRef(null);
   const client = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [content, setContent] = useState('');
   const { allMessages, sendMessage, recipient, refetchMessages } = useContext(
     MessageContext,
   );
 
+  const { data: newMessage, loading } = useSubscription(ON_NEW_MESSAGE, {
+    variables: { id: recipient?.id || '' },
+  });
+
   useEffect(() => {
-    console.log('recipient id', recipient?.id);
-    if (recipient == null) {
-      return;
+    if (newMessage) {
+      refetchMessages();
+      scrollToBottom();
     }
-    const subscription = client
-      .subscribe({
-        query: ON_NEW_MESSAGE,
-        variables: {
-          id: recipient.id,
-        },
-      })
-      .subscribe({
-        next({ data: { onNewMessage } }) {
-          console.log('---> new message');
-          refetchMessages();
-        },
-        error(err) {
-          console.log('=> error');
-          console.log(err);
-        },
-      });
-    return subscription.unsubscribe();
-  }, [recipient]);
+  }, [loading, newMessage]);
 
   const handleSend = async () => {
     try {
       await sendMessage(content, recipient?.id || '');
       setContent('');
+      scrollToBottom();
     } catch (e: any) {
       alert(e.message);
     }
@@ -61,6 +50,10 @@ const MessageView: FC = () => {
     if (event.key === 'Enter') {
       handleSend();
     }
+  };
+  const scrollToBottom = () => {
+    const el = (messagesEndRef.current) as any;
+    el.scrollIntoView({ behavior: 'smooth' });
   };
   return (
     <div style={{ flex: 1 }}>
@@ -74,6 +67,7 @@ const MessageView: FC = () => {
         {allMessages?.map((message) => (
           <Message key={message?.id} message={message} />
         ))}
+        <div ref={messagesEndRef} />
       </div>
       <div style={{ width: '100%' }}>
         <div

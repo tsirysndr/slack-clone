@@ -13,6 +13,7 @@ const Sidebar: FC = () => {
         backgroundColor: '#713cc5',
         color: '#fff',
         fontWeight: 500,
+        overflowY: 'scroll',
       }}
     >
       <CurrentUser />

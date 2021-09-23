@@ -34,14 +34,21 @@ export interface OnUserOnline_userOnlineStatus_channels_messages_receiver {
   lastName: string | null;
 }
 
+export interface OnUserOnline_userOnlineStatus_channels_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface OnUserOnline_userOnlineStatus_channels_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: OnUserOnline_userOnlineStatus_channels_messages_sender;
-  receiver: OnUserOnline_userOnlineStatus_channels_messages_receiver;
+  receiver: OnUserOnline_userOnlineStatus_channels_messages_receiver | null;
+  channel: OnUserOnline_userOnlineStatus_channels_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -77,14 +84,21 @@ export interface OnUserOnline_userOnlineStatus_sent_messages_receiver {
   lastName: string | null;
 }
 
+export interface OnUserOnline_userOnlineStatus_sent_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface OnUserOnline_userOnlineStatus_sent_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: OnUserOnline_userOnlineStatus_sent_messages_sender;
-  receiver: OnUserOnline_userOnlineStatus_sent_messages_receiver;
+  receiver: OnUserOnline_userOnlineStatus_sent_messages_receiver | null;
+  channel: OnUserOnline_userOnlineStatus_sent_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -108,14 +122,21 @@ export interface OnUserOnline_userOnlineStatus_received_messages_receiver {
   lastName: string | null;
 }
 
+export interface OnUserOnline_userOnlineStatus_received_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface OnUserOnline_userOnlineStatus_received_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: OnUserOnline_userOnlineStatus_received_messages_sender;
-  receiver: OnUserOnline_userOnlineStatus_received_messages_receiver;
+  receiver: OnUserOnline_userOnlineStatus_received_messages_receiver | null;
+  channel: OnUserOnline_userOnlineStatus_received_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;

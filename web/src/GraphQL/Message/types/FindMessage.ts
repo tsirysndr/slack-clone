@@ -25,14 +25,21 @@ export interface FindMessage_findMessage_receiver {
   lastName: string | null;
 }
 
+export interface FindMessage_findMessage_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface FindMessage_findMessage {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: FindMessage_findMessage_sender;
-  receiver: FindMessage_findMessage_receiver;
+  receiver: FindMessage_findMessage_receiver | null;
+  channel: FindMessage_findMessage_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;

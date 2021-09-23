@@ -34,14 +34,21 @@ export interface Login_login_channels_messages_receiver {
   lastName: string | null;
 }
 
+export interface Login_login_channels_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface Login_login_channels_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: Login_login_channels_messages_sender;
-  receiver: Login_login_channels_messages_receiver;
+  receiver: Login_login_channels_messages_receiver | null;
+  channel: Login_login_channels_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -77,14 +84,21 @@ export interface Login_login_sent_messages_receiver {
   lastName: string | null;
 }
 
+export interface Login_login_sent_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface Login_login_sent_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: Login_login_sent_messages_sender;
-  receiver: Login_login_sent_messages_receiver;
+  receiver: Login_login_sent_messages_receiver | null;
+  channel: Login_login_sent_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -108,14 +122,21 @@ export interface Login_login_received_messages_receiver {
   lastName: string | null;
 }
 
+export interface Login_login_received_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface Login_login_received_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: Login_login_received_messages_sender;
-  receiver: Login_login_received_messages_receiver;
+  receiver: Login_login_received_messages_receiver | null;
+  channel: Login_login_received_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;

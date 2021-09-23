@@ -34,14 +34,21 @@ export interface FindChannel_findChannel_creator_channels_messages_receiver {
   lastName: string | null;
 }
 
+export interface FindChannel_findChannel_creator_channels_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface FindChannel_findChannel_creator_channels_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: FindChannel_findChannel_creator_channels_messages_sender;
-  receiver: FindChannel_findChannel_creator_channels_messages_receiver;
+  receiver: FindChannel_findChannel_creator_channels_messages_receiver | null;
+  channel: FindChannel_findChannel_creator_channels_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -77,14 +84,21 @@ export interface FindChannel_findChannel_creator_sent_messages_receiver {
   lastName: string | null;
 }
 
+export interface FindChannel_findChannel_creator_sent_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface FindChannel_findChannel_creator_sent_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: FindChannel_findChannel_creator_sent_messages_sender;
-  receiver: FindChannel_findChannel_creator_sent_messages_receiver;
+  receiver: FindChannel_findChannel_creator_sent_messages_receiver | null;
+  channel: FindChannel_findChannel_creator_sent_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -108,14 +122,21 @@ export interface FindChannel_findChannel_creator_received_messages_receiver {
   lastName: string | null;
 }
 
+export interface FindChannel_findChannel_creator_received_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface FindChannel_findChannel_creator_received_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: FindChannel_findChannel_creator_received_messages_sender;
-  receiver: FindChannel_findChannel_creator_received_messages_receiver;
+  receiver: FindChannel_findChannel_creator_received_messages_receiver | null;
+  channel: FindChannel_findChannel_creator_received_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -155,14 +176,21 @@ export interface FindChannel_findChannel_messages_receiver {
   lastName: string | null;
 }
 
+export interface FindChannel_findChannel_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface FindChannel_findChannel_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: FindChannel_findChannel_messages_sender;
-  receiver: FindChannel_findChannel_messages_receiver;
+  receiver: FindChannel_findChannel_messages_receiver | null;
+  channel: FindChannel_findChannel_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;

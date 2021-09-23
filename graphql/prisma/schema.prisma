@@ -59,9 +59,9 @@ model message {
   id         String   @id @default(cuid())
   content    String
   senderId   String
-  receiverId String
+  receiverId String?
   sender     user     @relation(fields: [senderId], references: [id], name: "sender")
-  receiver   user     @relation(fields: [receiverId], references: [id], name: "receiver")
+  receiver   user?    @relation(fields: [receiverId], references: [id], name: "receiver")
   updatedAt  DateTime @updatedAt
   createdAt  DateTime @default(now())
   channel    channel? @relation("channel", fields: [channelId], references: [id])

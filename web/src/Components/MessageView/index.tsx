@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 import Header from '../Header';
 import Message from '../Message';
 import { AiOutlineSend } from 'react-icons/ai';
@@ -12,8 +12,21 @@ const SendButton = styled.div`
 `;
 
 const MessageView: FC = () => {
-  const { allMessages } = useContext(MessageContext);
-  const handleSend = () => {};
+  const [ content, setContent ] = useState('');
+  const { allMessages, sendMessage, recipient } = useContext(MessageContext);
+  const handleSend = async () => {
+    try {
+      await sendMessage(content, recipient?.id || '');
+      setContent('');
+    } catch (e: any) {
+      alert(e.message);
+    }
+  };
+  const handleKeyPress = (event: any) => {
+    if (event.key === 'Enter') {
+      handleSend();
+    }
+  };
   return (
     <div style={{ flex: 1 }}>
       <Header />
@@ -36,6 +49,9 @@ const MessageView: FC = () => {
           }}
         >
           <input
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            onKeyPress={handleKeyPress}
             style={{
               fontSize: 18,
               paddingLeft: 25,

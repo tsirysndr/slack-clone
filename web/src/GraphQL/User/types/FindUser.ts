@@ -34,14 +34,21 @@ export interface FindUser_findUser_channels_messages_receiver {
   lastName: string | null;
 }
 
+export interface FindUser_findUser_channels_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface FindUser_findUser_channels_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: FindUser_findUser_channels_messages_sender;
-  receiver: FindUser_findUser_channels_messages_receiver;
+  receiver: FindUser_findUser_channels_messages_receiver | null;
+  channel: FindUser_findUser_channels_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -77,14 +84,21 @@ export interface FindUser_findUser_sent_messages_receiver {
   lastName: string | null;
 }
 
+export interface FindUser_findUser_sent_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface FindUser_findUser_sent_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: FindUser_findUser_sent_messages_sender;
-  receiver: FindUser_findUser_sent_messages_receiver;
+  receiver: FindUser_findUser_sent_messages_receiver | null;
+  channel: FindUser_findUser_sent_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -108,14 +122,21 @@ export interface FindUser_findUser_received_messages_receiver {
   lastName: string | null;
 }
 
+export interface FindUser_findUser_received_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface FindUser_findUser_received_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: FindUser_findUser_received_messages_sender;
-  receiver: FindUser_findUser_received_messages_receiver;
+  receiver: FindUser_findUser_received_messages_receiver | null;
+  channel: FindUser_findUser_received_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;

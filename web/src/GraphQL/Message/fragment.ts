@@ -21,6 +21,10 @@ export const MESSAGE_FRAGMENT: DocumentNode = gql`
       firstName
       lastName
     }
+    channel {
+      id
+      name
+    }
     createdAt
     updatedAt
     channelId

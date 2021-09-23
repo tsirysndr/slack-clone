@@ -34,14 +34,21 @@ export interface AllUsers_allUsers_channels_messages_receiver {
   lastName: string | null;
 }
 
+export interface AllUsers_allUsers_channels_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface AllUsers_allUsers_channels_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: AllUsers_allUsers_channels_messages_sender;
-  receiver: AllUsers_allUsers_channels_messages_receiver;
+  receiver: AllUsers_allUsers_channels_messages_receiver | null;
+  channel: AllUsers_allUsers_channels_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -77,14 +84,21 @@ export interface AllUsers_allUsers_sent_messages_receiver {
   lastName: string | null;
 }
 
+export interface AllUsers_allUsers_sent_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface AllUsers_allUsers_sent_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: AllUsers_allUsers_sent_messages_sender;
-  receiver: AllUsers_allUsers_sent_messages_receiver;
+  receiver: AllUsers_allUsers_sent_messages_receiver | null;
+  channel: AllUsers_allUsers_sent_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -108,14 +122,21 @@ export interface AllUsers_allUsers_received_messages_receiver {
   lastName: string | null;
 }
 
+export interface AllUsers_allUsers_received_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface AllUsers_allUsers_received_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: AllUsers_allUsers_received_messages_sender;
-  receiver: AllUsers_allUsers_received_messages_receiver;
+  receiver: AllUsers_allUsers_received_messages_receiver | null;
+  channel: AllUsers_allUsers_received_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;

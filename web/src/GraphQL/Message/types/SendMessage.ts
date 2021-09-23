@@ -25,14 +25,21 @@ export interface SendMessage_sendMessage_receiver {
   lastName: string | null;
 }
 
+export interface SendMessage_sendMessage_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface SendMessage_sendMessage {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: SendMessage_sendMessage_sender;
-  receiver: SendMessage_sendMessage_receiver;
+  receiver: SendMessage_sendMessage_receiver | null;
+  channel: SendMessage_sendMessage_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;

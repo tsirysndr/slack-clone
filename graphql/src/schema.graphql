@@ -51,8 +51,8 @@ type message {
   content: String!
   createdAt: DateTime!
   id: ID!
-  receiver: user!
-  receiverId: String!
+  receiver: user
+  receiverId: String
   sender: user!
   senderId: String!
   updatedAt: DateTime!

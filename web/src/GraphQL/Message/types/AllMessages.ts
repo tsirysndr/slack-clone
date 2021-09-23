@@ -25,14 +25,21 @@ export interface AllMessages_allMessages_receiver {
   lastName: string | null;
 }
 
+export interface AllMessages_allMessages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface AllMessages_allMessages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: AllMessages_allMessages_sender;
-  receiver: AllMessages_allMessages_receiver;
+  receiver: AllMessages_allMessages_receiver | null;
+  channel: AllMessages_allMessages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;

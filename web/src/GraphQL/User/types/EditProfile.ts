@@ -34,14 +34,21 @@ export interface EditProfile_editProfile_channels_messages_receiver {
   lastName: string | null;
 }
 
+export interface EditProfile_editProfile_channels_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface EditProfile_editProfile_channels_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: EditProfile_editProfile_channels_messages_sender;
-  receiver: EditProfile_editProfile_channels_messages_receiver;
+  receiver: EditProfile_editProfile_channels_messages_receiver | null;
+  channel: EditProfile_editProfile_channels_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -77,14 +84,21 @@ export interface EditProfile_editProfile_sent_messages_receiver {
   lastName: string | null;
 }
 
+export interface EditProfile_editProfile_sent_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface EditProfile_editProfile_sent_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: EditProfile_editProfile_sent_messages_sender;
-  receiver: EditProfile_editProfile_sent_messages_receiver;
+  receiver: EditProfile_editProfile_sent_messages_receiver | null;
+  channel: EditProfile_editProfile_sent_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;
@@ -108,14 +122,21 @@ export interface EditProfile_editProfile_received_messages_receiver {
   lastName: string | null;
 }
 
+export interface EditProfile_editProfile_received_messages_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface EditProfile_editProfile_received_messages {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: EditProfile_editProfile_received_messages_sender;
-  receiver: EditProfile_editProfile_received_messages_receiver;
+  receiver: EditProfile_editProfile_received_messages_receiver | null;
+  channel: EditProfile_editProfile_received_messages_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;

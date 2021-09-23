@@ -25,14 +25,21 @@ export interface MessageFragment_receiver {
   lastName: string | null;
 }
 
+export interface MessageFragment_channel {
+  __typename: "channel";
+  id: string;
+  name: string;
+}
+
 export interface MessageFragment {
   __typename: "message";
   id: string;
   content: string;
   senderId: string;
-  receiverId: string;
+  receiverId: string | null;
   sender: MessageFragment_sender;
-  receiver: MessageFragment_receiver;
+  receiver: MessageFragment_receiver | null;
+  channel: MessageFragment_channel | null;
   createdAt: any;
   updatedAt: any;
   channelId: string | null;

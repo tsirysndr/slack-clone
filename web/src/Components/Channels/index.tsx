@@ -1,12 +1,15 @@
-import { FC, useContext } from 'react';
-import { AllChannels_allChannels } from '../../GraphQL/Channel/types/AllChannels';
+import { FC, useContext, useState } from 'react';
 import { ChannelContext } from '../../Providers/ChannelProvider';
 import { MessageContext } from '../../Providers/MessageProvider';
+import NewChannelModal from './NewChannelModal';
 
 const Channels: FC = () => {
   const { allChannels } = useContext(ChannelContext);
   const { selectRecipient, recipient } = useContext(MessageContext);
-  const handleCreateChannel = () => {};
+  const [ isOpen, setIsOpen ] = useState(false);
+  const handleCreateChannel = () => {
+    setIsOpen(true);
+  };
   return (
     <div style={{ marginBottom: 15 }}>
       <div style={{ fontWeight: 'bold', fontSize: 16 }}>Channels</div>
@@ -39,6 +42,7 @@ const Channels: FC = () => {
         >
           + Create a new channel
         </div>
+        <NewChannelModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
       </div>
     </div>
   );

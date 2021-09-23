@@ -13,7 +13,7 @@ export async function decodeAccessToken(
     if (!id) {
       return null;
     }
-    return prisma.user.findUnique({ where: { id } });
+    return prisma.user.findFirst({ where: { id } });
   }
   return null;
 }

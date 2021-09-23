@@ -17,11 +17,11 @@ export const ChannelMutation = extendType({
             name: args.name || cuid(),
             isPrivate: args.isPrivate || false,
             creator: {
-              connect: { id: '' },
+              connect: { id: ctx.currentUser!.id },
             },
-          }
+          },
         });
-      }
+      },
     });
     t.field('editChannel', {
       type: 'channel',
@@ -38,9 +38,9 @@ export const ChannelMutation = extendType({
             creator: {
               connect: { id: '' },
             },
-          }
+          },
         });
-      }
+      },
     });
   },
 });

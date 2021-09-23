@@ -12,6 +12,8 @@ export interface SendMessage_sendMessage_sender {
   id: string;
   email: string;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface SendMessage_sendMessage_receiver {
@@ -19,6 +21,8 @@ export interface SendMessage_sendMessage_receiver {
   id: string;
   email: string;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface SendMessage_sendMessage {

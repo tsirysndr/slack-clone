@@ -12,6 +12,8 @@ export interface AllMessages_allMessages_sender {
   id: string;
   email: string;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface AllMessages_allMessages_receiver {
@@ -19,6 +21,8 @@ export interface AllMessages_allMessages_receiver {
   id: string;
   email: string;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface AllMessages_allMessages {
@@ -36,4 +40,9 @@ export interface AllMessages_allMessages {
 
 export interface AllMessages {
   allMessages: (AllMessages_allMessages | null)[];
+}
+
+export interface AllMessagesVariables {
+  receiverId?: string | null;
+  channelId?: string | null;
 }

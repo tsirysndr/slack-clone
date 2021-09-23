@@ -12,6 +12,8 @@ export interface FindMessage_findMessage_sender {
   id: string;
   email: string;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface FindMessage_findMessage_receiver {
@@ -19,6 +21,8 @@ export interface FindMessage_findMessage_receiver {
   id: string;
   email: string;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface FindMessage_findMessage {

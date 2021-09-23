@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import Header from '../Header';
 import Message from '../Message';
 import { AiOutlineSend } from 'react-icons/ai';
 import styled from 'styled-components';
+import { MessageContext } from '../../Providers/MessageProvider';
 
 const SendButton = styled.div`
   cursor: pointer;
@@ -11,6 +12,7 @@ const SendButton = styled.div`
 `;
 
 const MessageView: FC = () => {
+  const { allMessages } = useContext(MessageContext);
   const handleSend = () => {};
   return (
     <div style={{ flex: 1 }}>
@@ -21,13 +23,9 @@ const MessageView: FC = () => {
           height: 'calc(100vh - (66px + 56px + 25px))',
         }}
       >
-        <Message />
-        <div style={{ padding: 15, fontWeight: 500 }}>
-          <div style={{ fontWeight: 'bold' }}>Koto</div>
-          <div style={{ padding: 5 }}>
-            Hello!
-          </div>
-        </div>
+        {allMessages?.map((message) => (
+          <Message key={message?.id} message={message} />
+        ))}
       </div>
       <div style={{ width: '100%' }}>
         <div

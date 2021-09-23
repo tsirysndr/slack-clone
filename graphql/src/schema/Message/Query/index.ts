@@ -6,8 +6,15 @@ export const MessageQuery = extendType({
   definition(t) {
     t.nonNull.list.field('allMessages', {
       type: 'message',
-      resolve: (_, args, ctx: Context) => {
-        return ctx.prisma.message.findMany();
+      args: {
+        receiverId: stringArg(),
+        channelId: stringArg(),
+      },
+      resolve: (_, args: any, ctx: Context) => {
+        if (args.channelId) {
+          return ctx.prisma.message.findMany({ where: { channelId: args.channelId } });
+        }
+        return ctx.prisma.message.findMany({ where: { receiverId: args.receiverId } });
       },
     });
     t.field('findMessage', {

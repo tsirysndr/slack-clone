@@ -11,11 +11,15 @@ export const MESSAGE_FRAGMENT: DocumentNode = gql`
       id
       email
       username
+      firstName
+      lastName
     }
     receiver {
       id
       email
       username
+      firstName
+      lastName
     }
     createdAt
     updatedAt

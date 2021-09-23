@@ -17,7 +17,7 @@ type Mutation {
 
 type Query {
   allChannels: [channel]!
-  allMessages: [message]!
+  allMessages(channelId: String, receiverId: String): [message]!
   allUsers: [user]!
   findChannel(id: String!): channel
   findMessage(id: String!): message

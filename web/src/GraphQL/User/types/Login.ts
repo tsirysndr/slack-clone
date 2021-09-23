@@ -21,6 +21,8 @@ export interface Login_login_channels_messages_sender {
   id: string;
   email: string;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface Login_login_channels_messages_receiver {
@@ -28,6 +30,8 @@ export interface Login_login_channels_messages_receiver {
   id: string;
   email: string;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface Login_login_channels_messages {
@@ -60,6 +64,8 @@ export interface Login_login_sent_messages_sender {
   id: string;
   email: string;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface Login_login_sent_messages_receiver {
@@ -67,6 +73,8 @@ export interface Login_login_sent_messages_receiver {
   id: string;
   email: string;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface Login_login_sent_messages {
@@ -87,6 +95,8 @@ export interface Login_login_received_messages_sender {
   id: string;
   email: string;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface Login_login_received_messages_receiver {
@@ -94,6 +104,8 @@ export interface Login_login_received_messages_receiver {
   id: string;
   email: string;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export interface Login_login_received_messages {

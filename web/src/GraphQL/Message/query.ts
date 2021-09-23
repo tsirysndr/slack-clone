@@ -2,8 +2,8 @@ import gql from 'graphql-tag';
 import { MESSAGE_FRAGMENT } from './fragment';
 
 export const DO_GET_ALL_MESSAGES = gql`
-  query AllMessages {
-    allMessages {
+  query AllMessages($receiverId: String, $channelId: String) {
+    allMessages(receiverId: $receiverId, channelId: $channelId) {
       ...MessageFragment
     }
   }

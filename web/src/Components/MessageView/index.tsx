@@ -5,8 +5,7 @@ import { AiOutlineSend } from 'react-icons/ai';
 import styled from 'styled-components';
 import { MessageContext } from '../../Providers/MessageProvider';
 import { ON_NEW_MESSAGE } from '../../GraphQL/Message/subscription';
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import { useApolloClient } from 'react-apollo';
+import { ApolloClient, NormalizedCacheObject, useApolloClient } from '@apollo/client';
 
 const SendButton = styled.div`
   cursor: pointer;

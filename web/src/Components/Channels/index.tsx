@@ -1,10 +1,11 @@
 import { FC, useContext } from 'react';
 import { AllChannels_allChannels } from '../../GraphQL/Channel/types/AllChannels';
 import { ChannelContext } from '../../Providers/ChannelProvider';
+import { MessageContext } from '../../Providers/MessageProvider';
 
 const Channels: FC = () => {
   const { allChannels } = useContext(ChannelContext);
-  const handleChangeChannel = (channel: AllChannels_allChannels | null) => {};
+  const { selectRecipient, recipient } = useContext(MessageContext);
   const handleCreateChannel = () => {};
   return (
     <div style={{ marginBottom: 15 }}>
@@ -13,9 +14,14 @@ const Channels: FC = () => {
         {allChannels?.map((channel) => (
           <div
             key={channel?.id}
-            onClick={() => handleChangeChannel(channel)}
+            onClick={() => selectRecipient(channel)}
             className="link"
-            style={{ padding: 5, cursor: 'pointer' }}
+            style={{
+              padding: 5,
+              cursor: 'pointer',
+              backgroundColor:
+                channel?.id === recipient?.id ? '#fd34d16b' : 'initial',
+            }}
           >
             {`# `}
             {channel?.name}

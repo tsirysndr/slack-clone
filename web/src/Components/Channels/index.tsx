@@ -1,20 +1,27 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
+import { AllChannels_allChannels } from '../../GraphQL/Channel/types/AllChannels';
+import { ChannelContext } from '../../Providers/ChannelProvider';
 
 const Channels: FC = () => {
-  const handleChangeChannel = (channel: string) => {
-
-  }
+  const { allChannels } = useContext(ChannelContext);
+  const handleChangeChannel = (channel: AllChannels_allChannels | null) => {};
   const handleCreateChannel = () => {};
   return (
     <div style={{ marginBottom: 15 }}>
       <div style={{ fontWeight: 'bold', fontSize: 16 }}>Channels</div>
       <div>
-        <div onClick={() => handleChangeChannel('id')} className="link" style={{ padding: 5, cursor: 'pointer' }}>
-          # aléatoire
-        </div>
-        <div className="link" style={{ padding: 5, cursor: 'pointer' }}>
-          # général
-        </div>
+        {allChannels?.map((channel) => (
+          <div
+            key={channel?.id}
+            onClick={() => handleChangeChannel(channel)}
+            className="link"
+            style={{ padding: 5, cursor: 'pointer' }}
+          >
+            {`# `}
+            {channel?.name}
+          </div>
+        ))}
+
         <div
           onClick={handleCreateChannel}
           className="link"

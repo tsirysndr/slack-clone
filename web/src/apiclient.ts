@@ -1,4 +1,10 @@
-import { ApolloClient, createHttpLink, DefaultOptions, InMemoryCache, split } from '@apollo/client';
+import {
+  ApolloClient,
+  createHttpLink,
+  DefaultOptions,
+  InMemoryCache,
+  split,
+} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
@@ -13,7 +19,7 @@ const defaultOptions: DefaultOptions = {
     fetchPolicy: 'no-cache',
     errorPolicy: 'all',
   },
-}
+};
 
 export const createClient = (token: string | null) => {
   const httpLink = createHttpLink({
@@ -35,7 +41,7 @@ export const createClient = (token: string | null) => {
     options: {
       reconnect: true,
       connectionParams: {
-        authToken: token || '',
+        authToken: getAccessToken() || '',
       },
     },
   });
@@ -47,7 +53,10 @@ export const createClient = (token: string | null) => {
   const link = split(
     ({ query }) => {
       const definition = getMainDefinition(query);
-      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
+      return (
+        definition.kind === 'OperationDefinition' &&
+        definition.operation === 'subscription'
+      );
     },
     wsLink,
     authLink.concat(httpLink),

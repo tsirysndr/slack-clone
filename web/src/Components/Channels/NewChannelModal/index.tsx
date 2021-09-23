@@ -22,7 +22,7 @@ const NewChannelModal: FC<NewChannelModalProps> = (props) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
-  const { createChannel } = useContext(ChannelContext);
+  const { createChannel, refreshChannels } = useContext(ChannelContext);
   const initialRef = useRef<any>();
   const handleCreate = () => {
     if (name.trim() === '') {

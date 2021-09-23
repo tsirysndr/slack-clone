@@ -11,7 +11,7 @@ export interface Context {
   currentUser?: user | null;
 }
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
 export async function createContext(
   { req }: any,

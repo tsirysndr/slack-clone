@@ -1,9 +1,12 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import Header from '../Header';
 import Message from '../Message';
 import { AiOutlineSend } from 'react-icons/ai';
 import styled from 'styled-components';
 import { MessageContext } from '../../Providers/MessageProvider';
+import { ON_NEW_MESSAGE } from '../../GraphQL/Message/subscription';
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import { useApolloClient } from 'react-apollo';
 
 const SendButton = styled.div`
   cursor: pointer;
@@ -12,8 +15,37 @@ const SendButton = styled.div`
 `;
 
 const MessageView: FC = () => {
-  const [ content, setContent ] = useState('');
-  const { allMessages, sendMessage, recipient } = useContext(MessageContext);
+  const client = useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const [content, setContent] = useState('');
+  const { allMessages, sendMessage, recipient, refetchMessages } = useContext(
+    MessageContext,
+  );
+
+  useEffect(() => {
+    console.log('recipient id', recipient?.id);
+    if (recipient == null) {
+      return;
+    }
+    const subscription = client
+      .subscribe({
+        query: ON_NEW_MESSAGE,
+        variables: {
+          id: recipient.id,
+        },
+      })
+      .subscribe({
+        next({ data: { onNewMessage } }) {
+          console.log('---> new message');
+          refetchMessages();
+        },
+        error(err) {
+          console.log('=> error');
+          console.log(err);
+        },
+      });
+    return subscription.unsubscribe();
+  }, [recipient]);
+
   const handleSend = async () => {
     try {
       await sendMessage(content, recipient?.id || '');

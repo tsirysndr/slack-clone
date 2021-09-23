@@ -26,22 +26,26 @@ export const MessageMutation = extendType({
           throw new Error('Recipient not found');
         }
         if (recipientCount > 0) {
-          return ctx.prisma.message.create({
+          const msg = await ctx.prisma.message.create({
             data: {
               content: args.content,
               sender: { connect: { id: ctx.currentUser.id } },
               receiver: { connect: { id: args.recipient } },
             },
           });
+          await ctx.pubsub.publish('NEW_MESSAGE', msg);
+          return msg;
         }
         if (channelCount > 0) {
-          return ctx.prisma.message.create({
+          const msg = await ctx.prisma.message.create({
             data: {
               content: args.content,
               sender: { connect: { id: ctx.currentUser.id } },
               channel: { connect: { id: args.recipient } },
             },
           });
+          await ctx.pubsub.publish('NEW_MESSAGE', msg);
+          return msg;
         }
         throw new Error('Recipient not found');
       },

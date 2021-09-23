@@ -5,7 +5,7 @@ import { createServer } from 'http';
 import { execute, subscribe } from 'graphql';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { schema } from './schema';
-import { context, createContext } from './context';
+import { context, createContext, prisma } from './context';
 import bodyParser from 'body-parser';
 
 const app = express();
@@ -42,6 +42,35 @@ httpServer.listen(PORT, () => {
           ...params,
           context,
         };
+      },
+      onConnect: async (connectionParams: any, websocket: any) => {
+        console.log('authToken', connectionParams.authToken);
+        const id = await redis.get(connectionParams.authToken);
+        if (id != null) {
+          const currentUser = await prisma.user.findFirst({ where: { id } });
+          context.currentUser = currentUser;
+          await prisma.user.update({
+            where: { id },
+            data: { status: 'ACTIVE' },
+          });
+        }
+        return {
+          ...connectionParams,
+          context,
+        };
+      },
+      onDisconnect: async (websocket: any, context: any) => {
+        const { authToken } = await context.initPromise;
+        // console.log('onDisconnect', authToken);
+        const id = await redis.get(authToken);
+        if (id != null) {
+          const currentUser = await prisma.user.findFirst({ where: { id } });
+          context.currentUser = currentUser;
+          await prisma.user.update({
+            where: { id },
+            data: { status: 'AWAY' },
+          });
+        }
       },
     },
     {

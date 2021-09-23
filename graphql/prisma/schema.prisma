@@ -32,7 +32,7 @@ model user {
   users_channels    users_channels[]
   sent_messages     message[]        @relation(name: "sender")
   received_messages message[]        @relation(name: "receiver")
-  status            UserStatus       @default(ACTIVE)
+  status            UserStatus       @default(AWAY)
 }
 
 model users_channels {

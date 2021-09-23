@@ -1,3 +1,4 @@
+import { message } from '.prisma/client';
 import { withFilter } from 'graphql-subscriptions';
 import { nonNull, stringArg, subscriptionField } from 'nexus';
 import { Context } from '../../context';
@@ -9,11 +10,14 @@ export const MessageSubscription = subscriptionField('newMessage', {
   },
   subscribe: withFilter(
     (_, args, ctx: Context) => ctx.pubsub.asyncIterator('NEW_MESSAGE'),
-    (payload, args, ctx) => {
-      return true;
+    (payload: message, args, ctx) => {
+      if (payload.receiverId === args.id || payload.channelId === args.id) {
+        return true;
+      }
+      return false;
     },
   ),
-  resolve: async (payload, args, ctx) => {
-    return payload.message;
+  resolve: async (payload: message, args, ctx) => {
+    return payload;
   },
 });
